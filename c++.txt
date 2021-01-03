@@ -1,0 +1,46 @@
+# template
+    > template specialization & template instantiation:
+        specialization: modify the template body if necessary.
+        instantiation: explicit make template into instance.
+        example:
+            template <typename T>
+            void Swap (T &t1, T &t2) {
+                T temp = t1;
+                t1 = t2;
+                t2 = temp;
+            }
+
+            // specialization
+            template <> Swap<string> (string &s1, string &s2) {
+                // do something different from original template body.
+            }
+
+            // instantiation, note that <> cannot exist between template and function name.
+            template Swap<int> (int &, int &);
+    > template is just a declaration but not a defination, a template instantiation occured when a function related to the template get invoked.
+
+# class
+    > object initialization:
+        new:
+        placement new:
+    > object assign doesn't call the copy constructor, but the operator=.
+    > function delete, motivated by class unique_ptr.
+        example:
+            class Test {
+                Test& operator= (Test&) = delete;
+            }
+            int main () {
+                Test t1, t2;
+                t1 = t2;    // not allowed, cause operator= has been deleted.
+            }
+
+# key words
+    > explicit: force a function call to be explicit, such as class's default constructor with only one parameter.
+        example:
+            class A {
+                explicit A (int a) {}
+            }
+            int main () {
+                A a = 1;    // invalid, cause A (int a) must be called explicitly.
+            }
+    > decltype: used to declare variable b whose type is similar to a, such as decltype(a) b.
